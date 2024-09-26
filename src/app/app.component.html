@@ -3,7 +3,7 @@
   <h3>{{userName}}</h3>
 }
 @else {
-  <h5>User not logged in </h5>
+  <h3>User not logged in </h3>
 }
 <!-- if directive with numbers -->
 
@@ -21,5 +21,86 @@
  @else if (userRole == 'Member'){
   <h4>Welcome Member</h4>
 }
+<p>26-sep-24</p>
 <!-- ng for Directives -->
-  
+
+<h3>{{users}}</h3>
+
+<h3>{{users[0]}}</h3>
+<h3>{{users[1]}}</h3>
+<h3>{{users[2]}}</h3>
+<h3>{{users[3]}}</h3>
+
+@for (user of users; track user) {
+  <h3>{{users}} - from new for syntax</h3>
+}
+<ol>
+@for (user of users; track user) {
+  <li>{{ user }} - from new for syntax</li>
+}
+</ol>
+
+@for (user of userObject;track user) {
+  <li>{{user.name}}</li>
+}
+
+@for (user of userObject;track user) {
+  <li>{{user.email}}</li>
+}
+
+<!-- Change Detection -->
+
+<p>   </p>
+@for (user of userObject;track user;let i = $index) {
+  <li>{{i}} {{user.name}}</li>
+}
+<p></p>
+@for (user of userObject;track user; let i = $index) {
+  <li>{{i}} {{user.email}} </li>
+}
+@empty {
+  <p>No user found</p>
+}
+
+<button (click) = "addNewUser()">Add New User</button>
+
+<button (click) = "removeUser()"> Remove User</button>
+
+@if (userObject.length == 0) {
+  <p>No users exist</p>
+}
+
+@for (user of userObject;track user;let i = $index;let first=$first) {
+  <li>{{first}} {{i}} {{user.name}}</li>
+}
+<p></p>
+@for (user of userObject;track user; let i = $index; let odd = $odd) {
+  <li>{{odd}} {{i}} {{user.email}} </li>
+}
+<p></p>
+@for (user of userObject;track user;let i = $index ; let even = $even) {
+  <li>{{ even }}{{i}} {{user.name}}</li>
+}
+<p></p>
+@for (user of userObject;track user;let i = $index ; let last = $last) {
+  <li>{{ last }}{{i}} {{user.name}}</li>
+}
+
+<!-- @Switch directive -->
+
+<div>
+  <p>Welcomr Admin</p>
+  <p>Welcomr Member</p>
+</div>
+
+@switch(userSwitch){
+  @case('Admin'){
+    <p>welcome Admin</p>
+  }
+  @case('Member'){
+    <p>Welcome member</p>
+  }
+  @default {
+    <p>Please Login</p>
+  }
+}
