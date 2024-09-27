@@ -1,0 +1,8 @@
+.login{
+    color: rgb(57, 149, 230);
+    text-transform : uppercase;
+}
+.logout{
+    font-style: italic;
+    color :coral;
+}

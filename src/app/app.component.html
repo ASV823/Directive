@@ -104,3 +104,24 @@
     <p>Please Login</p>
   }
 }
+<p>27-sep-24</p>
+ <!-- Attribute directive -->
+
+<h2 [style.color] = "'rgb(254, 167, 79)'" [style.textTransform]="'uppercase'"> ATTRIBUTE DIRECTIVE</h2>
+<h3 [ngStyle]="{
+  'color':isLoggedin? 'green' :'red',
+  'textTransform':isLoggedin? 'uppercase':'lowercase'}">Hi,welcome</h3>
+
+  <!-- ngClass -->
+<h3 [class.login]="isLoggedin" [class.logout]="!isLoggedin"> Ng Class</h3>
+<h3 [ngClass]="{
+  'login' : login,
+  'logout': !login
+  }">Ng class directive</h3>
+
+<!-- Component Relationships -->
+
+<h3>{{userTitle}} (APP)</h3>
+<app-user [userListTitle]="userTitle" [PostIsLogin] ='appIsLogin'></app-user>
+
+<p>{{message}}</p>

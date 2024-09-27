@@ -1,15 +1,17 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
+import { Component , ViewChild, AfterViewInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
+import { UserComponent } from './user/user.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf,NgFor],
+  imports: [RouterOutlet, NgIf,NgFor,NgStyle,NgClass,HeaderComponent,UserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'profile';
   isLoggedIn : boolean = true;
   userName : string = "Vikas";
@@ -48,8 +50,23 @@ export class AppComponent {
 
   constructor(){
     console.log(this.userObject.length);
-    
+    console.log(this.childMessage);
   }
 
-  userSwitch :string = "Admin";
+  userSwitch :string = "Member";
+
+  isLoggedin:boolean = false;
+
+  login:boolean=true;
+
+  userTitle : string= 'User 2';
+  appIsLogin : boolean=false;
+
+  @ViewChild(UserComponent) childMessage:any;
+  message:string = '';
+    
+  ngAfterViewInit(){
+    console.log(this.childMessage);
+    this.message = this.childMessage.childMessage;
+  }
 }
