@@ -1,13 +1,14 @@
-import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component , ViewChild, AfterViewInit} from '@angular/core';
+import { NgClass, NgComponentOutlet, NgFor, NgIf, NgStyle } from '@angular/common';
+import { Component , ViewChild, AfterViewInit,ViewContainerRef} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
+import { CardComponent } from './card/card.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf,NgFor,NgStyle,NgClass,HeaderComponent,UserComponent],
+  imports: [RouterOutlet, NgIf,NgFor,NgStyle,NgClass,HeaderComponent,UserComponent,CardComponent, NgComponentOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,7 +19,7 @@ export class AppComponent implements AfterViewInit {
 
   isAdmin : boolean= false;
   isMember : boolean = false;
-  isGuest : boolean = true
+  isGuest : boolean = true;
 
   loginCount : number = 0;
   countLoginAttempts() {
@@ -48,19 +49,20 @@ export class AppComponent implements AfterViewInit {
 
   // Array length index
 
-  constructor(){
+  constructor(private viewContainer : ViewContainerRef){
     console.log(this.userObject.length);
     console.log(this.childMessage);
   }
 
   userSwitch :string = "Member";
 
-  isLoggedin:boolean = false;
+// Attribute directives
+  isLoggedin:boolean = true;
 
-  login:boolean=true;
+  login:boolean=false;
 
   userTitle : string= 'User 2';
-  appIsLogin : boolean=false;
+  appIsLogin : boolean=true;
 
   @ViewChild(UserComponent) childMessage:any;
   message:string = '';
@@ -69,4 +71,23 @@ export class AppComponent implements AfterViewInit {
     console.log(this.childMessage);
     this.message = this.childMessage.childMessage;
   }
+
+  messageFromChild : string='';
+
+  reciveMessage(message:string){
+    console.log(message);
+    this.messageFromChild = message;
+  }
+
+  loadComponent(){
+    this.viewContainer.createComponent(HeaderComponent);
+  }
+
+  removeComponent(){
+    this.viewContainer.remove();
+  }
+  changeUser(){
+    this.userName ='Daksh';
+  }
+
 }

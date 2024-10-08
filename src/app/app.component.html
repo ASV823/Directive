@@ -122,6 +122,27 @@
 <!-- Component Relationships -->
 
 <h3>{{userTitle}} (APP)</h3>
-<app-user [userListTitle]="userTitle" [PostIsLogin] ='appIsLogin'></app-user>
+<app-user [userListTitle]="userTitle" [PostIsLogin] ='appIsLogin' (MessageEvent) = "reciveMessage($event)"></app-user>
 
 <p>{{message}}</p>
+
+<p>{{messageFromChild}}</p>
+<app-card>
+  <p>This is from ng content card</p>
+</app-card>
+
+<app-card>
+  <span header> username </span>
+  <h1 body>John Doe</h1>
+  <button footer>View Profile</button>
+</app-card>
+
+<!-- <div *ngComponentOutlet="loadComponent()"></div> -->
+<button (click) = "loadComponent()">Creeate Component</button>
+<button (click) = "removeComponent()"> disload Component</button>
+
+<app-header [pUserName]="userName "></app-header>
+<button (click)="changeUser()">change user Name</button>
+
+<button (click)="loadComponent()">Load Header</button>
+<button (click)="removeComponent()">deleate component</button>
